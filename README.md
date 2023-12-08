@@ -107,8 +107,10 @@ from sklearn.metrics import confusion_matrix
 conf_matrix = confusion_matrix(y_test, y_pred)
 print(conf_matrix)
 ```
+![Screenshot 2023-12-08 at 2 29 12 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5dbd8c76-4447-463b-b3e6-b7e5d721efde)
+***Figure 5:** Confusion Matrix for Obesity Level Prediction.*
 
-The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in our case we saw that we barely have any incorrect predictions. This information is crucial for refining the model and for understanding the nuances of the predictive process.
+The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in our case we saw that we barely have any incorrect predictions. The matrix in Figure 6 suggests a relatively balanced prediction across different obesity levels, which is indicative of a well-performing model. This information is crucial for refining the model and for understanding the nuances of the predictive process.
 
 ## Conclusions and Learnings
 
