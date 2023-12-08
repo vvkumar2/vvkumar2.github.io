@@ -20,8 +20,6 @@ On the other hand, the analysis of categorical data through bar charts highlight
 
 Additionally, a correlation analysis, depicted via a heatmap, was very telling. It primarily indicated a moderate positive correlation between height and weight, but most other features had little to no correlation at all. This is understandable once you realize that BMI is calculated based on Height and Weight, and BMI is how you determine obesity level.
 
-![Heatmap](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/e1b29386-cc3b-4f79-af71-6bd2d180975a)
-
 Lastly, to better understand the relationships between variables, I created a series of paired plots. Among these, one particularly revealing graph depicted the distribution of each obesity class (NObeyesdad) in relation to family history of obesity. This graph strikingly illustrated that individuals classified in any category of overweight or obesity often have a family history of similar conditions. Conversely, for those categorized as normal weight, the presence or absence of a family history of obesity appeared to be more evenly distributed. This observation is clearly evident in the graph provided below. For a more detailed view of these relationships and other insights, all the plots from the data visualization section are accessible in the Colab Notebook
 
 ![Family History of Overweight](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/67fed472-f8d4-4c8d-963d-d49223b69bd2)
@@ -74,8 +72,6 @@ In this figure, we can see that most of the features have an extremely low impor
 Thus, I reduced the feature set from 31 to 9. However, the accuracy of the model on the testing data showed a negligible change, remaining at 96%. This outcome suggests that many of the removed features, while contributing to the model's complexity, did not significantly impact its predictive ability. This finding underscores the importance of feature selection in machine learning, highlighting that a more concise feature set can yield comparable performance, potentially reducing computational costs and improving model interpretability.
 
 This scenario also illustrates a key learning in model development: the most complex model is not always the most effective or efficient. By refining the feature set, we aimed to create a more streamlined model without compromising on accuracy, which is a valuable approach, especially in real-world applications where interpretability and efficiency are crucial.
-
-![Screenshot 2023-12-08 at 1 29 05 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5fa569fc-ed4e-40c2-8239-1efb49721f31)
 
 Overall, both models demonstrated high accuracy. Detailed classification reports and confusion matrices were generated for each model to further assess their performance. An analysis of feature importance highlighted the pivotal roles of weight, height, age, FCVC (Frequency of Consumption of Vegetables), and NCP (Number of Main Meals), indicating the significant influence of dietary habits and basic physical attributes on obesity levels.
 
