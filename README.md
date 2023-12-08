@@ -1,4 +1,4 @@
-![Screenshot 2023-12-08 at 1 29 05 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5fa569fc-ed4e-40c2-8239-1efb49721f31)# A&O SCI C111: Obesity Level Prediction
+# A&O SCI C111: Obesity Level Prediction
 
 ## Project Overview
 
@@ -74,6 +74,8 @@ In this figure, we can see that most of the features have an extremely low impor
 Thus, I reduced the feature set from 31 to 9. However, the accuracy of the model on the testing data showed a negligible change, remaining at 96%. This outcome suggests that many of the removed features, while contributing to the model's complexity, did not significantly impact its predictive ability. This finding underscores the importance of feature selection in machine learning, highlighting that a more concise feature set can yield comparable performance, potentially reducing computational costs and improving model interpretability.
 
 This scenario also illustrates a key learning in model development: the most complex model is not always the most effective or efficient. By refining the feature set, we aimed to create a more streamlined model without compromising on accuracy, which is a valuable approach, especially in real-world applications where interpretability and efficiency are crucial.
+
+![Screenshot 2023-12-08 at 1 29 05 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5fa569fc-ed4e-40c2-8239-1efb49721f31)
 
 Overall, both models demonstrated high accuracy. Detailed classification reports and confusion matrices were generated for each model to further assess their performance. An analysis of feature importance highlighted the pivotal roles of weight, height, age, FCVC (Frequency of Consumption of Vegetables), and NCP (Number of Main Meals), indicating the significant influence of dietary habits and basic physical attributes on obesity levels.
 
