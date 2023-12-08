@@ -25,6 +25,7 @@ All of the records are labeled with the class variable 'NObesity' (Obesity Level
 The exploration of the dataset involved delving into both numerical and categorical data. For the numerical features, histograms were created as seen below.
 
 ![Numerical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/a34454e4-e426-4aac-8ccc-3b93406e306e)
+
 ***Figure 1:** Histograms of some of the numerical data, revealing insights such as age distribution and weight patterns.*
 
 From our numerical data in Figure 1, here are a few trends that we see:
@@ -38,6 +39,7 @@ From our numerical data in Figure 1, here are a few trends that we see:
 On the other hand, we analyzed categorical data with bar charts as seen below.
 
 ![Categorical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/35f9fb65-4296-4341-ae30-a73d5cf18fff)
+
 ***Figure 2:** Bar charts for categorical data analysis, highlighting gender distribution and family history of obesity.*
 
 From our categorical data in Figure 2, here are a couple trends that we see:
@@ -51,6 +53,7 @@ Additionally, a correlation analysis, depicted via a heatmap, was very telling. 
 Lastly, to better understand the relationships between variables, I created a series of paired plots. Among these, one particularly revealing graph depicted the distribution of each obesity class (NObeyesdad) in relation to family history of obesity. This graph strikingly illustrated that individuals classified in any category of overweight or obesity often have a family history of similar conditions. Conversely, for those categorized as normal weight, the presence or absence of a family history of obesity appeared to be more evenly distributed. This observation is clearly evident in the graph provided below. For a more detailed view of these relationships and other insights, all the plots from the data visualization section are accessible in the Colab Notebook.
 
 ![Family History of Overweight](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/67fed472-f8d4-4c8d-963d-d49223b69bd2)
+
 ***Figure 3:** Paired plot depicting the relationship between obesity class and family history of obesity.*
 
 ### Data Preprocessing
@@ -94,6 +97,7 @@ While GridSearchCV offers the capability to simultaneously test a wide array of 
 Then I built the RandomForestClassifier model and fit it using the training data. After fitting the model, we observed high accuracy in both training (100%) and testing (96%). However, an important aspect of this project was to refine the model by focusing on the most influential features. This was achieved by analyzing feature importance scores and retaining only those features with scores above a certain threshold. The feature importance chart is shown below.
 
 ![Feature Importance Chart](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5e6ca07b-0b57-4ad3-8322-78ad1f87e3a3)
+
 ***Figure 4:** Feature importance chart, illustrating the relative importance of features like height, weight, and dietary habits.*
 
 In figure 4, most of the features are shown to have an extremely low importance score. Only the top ten or so features contributed significantly to our prediction. So, I only kept features with an importance score greater 0.01 as shown below.
@@ -124,7 +128,8 @@ conf_matrix = confusion_matrix(y_test, y_pred)
 print(conf_matrix)
 ```
 ![Screenshot 2023-12-08 at 2 29 12 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5dbd8c76-4447-463b-b3e6-b7e5d721efde)
-\***Figure 5:** Confusion Matrix for Obesity Level Prediction.*
+
+***Figure 5:** Confusion Matrix for Obesity Level Prediction.*
 
 The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in Figure 5 we see that we barely have any incorrect predictions. The matrix suggests a relatively balanced prediction across different obesity levels, which is indicative of a well-performing model. This information is crucial for refining the model and for understanding the nuances of the predictive process.
 
