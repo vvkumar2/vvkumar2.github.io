@@ -18,7 +18,7 @@ The dataset, titled 'Estimation of obesity levels based on eating habits and phy
 
 * CH2O (Consumption of Water Daily): This feature quantifies the amount of water an individual drinks. Proper hydration is often associated with overall health and can influence dietary habits, satiety, and metabolism.
 
-All of the records are labeled with the class variable 'NObesity' (Obesity Level), facilitating the categorization into distinct classes like Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III. This dataset is available from the UCI Machine Learning Repository.
+All of the records are labeled with the class variable 'NObesity' (Obesity Level), facilitating the categorization into distinct classes like Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III. This dataset is available from the UCI Machine Learning Repository at this [link](https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition).
 
 ### Data Exploration
 
