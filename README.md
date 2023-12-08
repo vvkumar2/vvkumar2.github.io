@@ -25,7 +25,7 @@ All of the records are labeled with the class variable 'NObesity' (Obesity Level
 The exploration of the dataset involved delving into both numerical and categorical data. For the numerical features, histograms were created as seen below.
 
 ![Numerical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/a34454e4-e426-4aac-8ccc-3b93406e306e)
-***Figure 1:** Histograms of numerical data, revealing insights such as age distribution and weight patterns.*
+***Figure 1:** Histograms of some of the numerical data, revealing insights such as age distribution and weight patterns.*
 
 From our numerical data in Figure 1, here are a few trends that we see:
 
