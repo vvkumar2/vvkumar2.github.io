@@ -2,41 +2,62 @@
 
 ## Project Overview
 
-This report presents a detailed analysis of an obesity dataset for a machine learning project that I conducted. The primary objective of this project was to employ a classification model to predict obesity levels based on a variety of features. I will detail the process of preparing the data, how I selected the model, and the rationale behind these choices, providing a comprehensive understanding of each step in the project's development.
+The primary objective of this project was to employ a classification model to predict obesity levels based on a variety of features. This report will detail the process of preparing the data, selecting the model, and the rationale behind these choices, providing a comprehensive understanding of each step in the project's development.
+
+### Background
+
+Obesity is a global health issue that has seen a dramatic increase in prevalence over the past few decades. It is a risk factor for numerous health conditions, including heart disease, diabetes, and hypertension. Understanding the determinants of obesity and accurately predicting it is crucial for public health interventions. This study aims to leverage machine learning techniques to analyze and predict obesity levels based on individual data, finding the factors that affect it the most. The project aligns with the growing interest in the use of data science and machine learning in healthcare to enhance preventive medicine and public health strategies.
 
 ### The Dataset
 
-"The dataset, titled 'Estimation of obesity levels based on eating habits and physical condition', comprises 2111 instances and 17 features. It was specifically gathered to estimate obesity levels in individuals from Mexico, Peru, and Colombia, focusing on their eating habits and physical condition. The features include fundamental attributes such as Gender, Age, Height, Weight, alongside other lifestyle-related variables that are integral to understanding obesity levels. All records are labeled with the class variable 'NObesity' (Obesity Level), facilitating the categorization into distinct classes like Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III. This dataset is available from the UCI Machine Learning Repository.
+The dataset, titled 'Estimation of obesity levels based on eating habits and physical condition', comprises 2111 instances and 17 features. It was specifically gathered to estimate obesity levels in individuals from Mexico, Peru, and Colombia, focusing on their eating habits and physical condition. The features include fundamental attributes such as Gender, Age, Height, Weight, alongside other lifestyle-related variables that are integral to understanding obesity levels. All records are labeled with the class variable 'NObesity' (Obesity Level), facilitating the categorization into distinct classes like Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III. This dataset is available from the UCI Machine Learning Repository.
 
 ### Data Exploration
 
-The exploration of the dataset involved delving into both numerical and categorical data. For the numerical features, histograms were created, revealing insights like a right-skewed age distribution (meaning most participants were young), normally distributed heights, and a bimodal distribution in weight. This, plus the insights from the other numerical features can be seen in the chart below.
+The exploration of the dataset involved delving into both numerical and categorical data. For the numerical features, histograms were created as seen below.
 
-![Numerical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/ef1c6327-b407-478e-9c27-8a095b9000fe)
+![Numerical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/a34454e4-e426-4aac-8ccc-3b93406e306e)
+***Figure 1:** Histograms of numerical data, revealing insights such as age distribution and weight patterns.*
 
-On the other hand, the analysis of categorical data through bar charts highlighted a balanced gender distribution and a significant proportion of participants having a family history of being overweight. This will later be important in our evaluation.  
+From our numerical data in Figure 1, here are a few trends that we see:
 
-![Categorical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/626e49de-a943-4dc2-a269-0dc08d898c1c)
+1. Age Distribution: The age distribution of the participants, as depicted in Figure 1, shows a significant right skew. This skewness indicates that a majority of the dataset's participants are young, with a mean age around 24 years. This demographic skew could have implications for the generalizability of the study's findings, as it predominantly reflects the obesity levels in a younger population.
 
-Additionally, a correlation analysis, depicted via a heatmap, was very telling. It primarily indicated a moderate positive correlation between height and weight, but most other features had little to no correlation at all. This is understandable once you realize that BMI is calculated based on Height and Weight, and BMI is how you determine obesity level.
+2. Height Distribution: The height data presents a normal distribution with both mean and median around 1.70 meters. This normal distribution suggests that height varies regularly and predictably across the dataset, which is expected in a diverse adult population.
+
+3. Weight Distribution: The weight of participants displays a bimodal distribution, meaning there are two different weight groups prominently represented in the dataset. This bimodality may reflect distinct subgroups within the population, each with different weight characteristics.
+
+On the other hand, we analyzed categorical data with bar charts as seen below.
+
+![Categorical Data](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/35f9fb65-4296-4341-ae30-a73d5cf18fff)
+***Figure 2:** Bar charts for categorical data analysis, highlighting gender distribution and family history of obesity.*
+
+From our categorical data in Figure 2, here are a couple trends that we see:
+
+1. Gender Distribution: The near-equal distribution of men and women in the dataset, as shown in Figure 2, suggests that the results of the study can be considered representative across genders. This balance is crucial for ensuring that the findings are not biased toward one gender.
+
+2. Family History with Overweight: A significant number of participants have a family history of being overweight. This observation is critical as it highlights the potential genetic or environmental factors contributing to obesity, which are important considerations in obesity research and interventions.
+
+Additionally, a correlation analysis, depicted via a heatmap, was very telling. The heatmap of correlations indicated a moderate positive correlation between height and weight, aligning with the general understanding of body mass index (BMI) calculation. However, other features showed little to no correlation, suggesting that factors influencing obesity are not strongly linearly related in this dataset.
 
 Lastly, to better understand the relationships between variables, I created a series of paired plots. Among these, one particularly revealing graph depicted the distribution of each obesity class (NObeyesdad) in relation to family history of obesity. This graph strikingly illustrated that individuals classified in any category of overweight or obesity often have a family history of similar conditions. Conversely, for those categorized as normal weight, the presence or absence of a family history of obesity appeared to be more evenly distributed. This observation is clearly evident in the graph provided below. For a more detailed view of these relationships and other insights, all the plots from the data visualization section are accessible in the Colab Notebook
 
 ![Family History of Overweight](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/67fed472-f8d4-4c8d-963d-d49223b69bd2)
+***Figure 3:** Paired plot depicting the relationship between obesity class and family history of obesity.*
 
 ### Data Preprocessing
 
 The preprocessing phase entailed one-hot encoding of categorical variables and normalization of features using Min-Max scaling. 
 
 ```python
-# Make all feature values between 0 and 1 for normalization
+from sklearn.preprocessing import MinMaxScaler
+
+# Min-Max Scaling
 feature_scaler = MinMaxScaler()
 obesity_features_scaled = feature_scaler.fit_transform(obesity_features)
 ```
 
-As seen in the code above, we need to normalize the features to ensure that each variable contributes equally to the analysis and prevent any feature with a larger scale from dominating the model's learning process. Initially, all features were considered for the model. 
-
-A strategic 80/20 split was executed to separate the data into training and testing sets.
+Normalization was essential to ensure that each variable contributes equally to the analysis and to prevent any feature with a larger scale from dominating the model's learning process. Initially, all features were considered for the model. A strategic 80/20 split was executed to separate the data into training and testing sets.
 
 ## Model Selection and Justification
 
@@ -48,7 +69,7 @@ Random forests also provide valuable insights into feature importance, which is 
 
 ## Model Development & Evaluation
 
-To build the model, hyperparameters like `max_depth` were meticulously tuned using GridSearchCV to find the optimal balance between model complexity and generalization ability. 
+To build the model, hyperparameters like max_depth were meticulously tuned using GridSearchCV to find the optimal balance between model complexity and generalization ability. The following code snippet demonstrates the hyperparameter tuning process:
 
 ```python
 rf_classifier = RandomForestClassifier(random_state=42)
@@ -60,20 +81,34 @@ grid_search.fit(X_train, y_train)
 best_max_depth = grid_search.best_params_["max_depth"]
 ```
 
-As shown in the code above, GridSearchCV was performed. It is a method for systematically cross-validating through combinations of hyperparameters to determine which gives the best performance.
-
+While GridSearchCV offers the capability to simultaneously test a wide array of hyperparameters, I found that its runtime was excessively lengthy for my needs. Therefore, I opted to evaluate each hyperparameter individually, which proved to be a more time-efficient approach.
 
 After fitting the model, we observed high accuracy in both training (100%) and testing (96%). However, an important aspect of this project was to refine the model by focusing on the most influential features. This was achieved by analyzing feature importance scores and retaining only those features with scores above a certain threshold. The feature importance chart is shown below.
 
 ![Feature Importance Chart](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5e6ca07b-0b57-4ad3-8322-78ad1f87e3a3)
+***Figure 4:** Feature importance chart, illustrating the relative importance of features like height, weight, and dietary habits.*
 
-In this figure, we can see that most of the features have an extremely low importance score. In fact, only the top ten or so even seem to be contributing anything to our prediction.
+In figure 4, most of the features were found to have an extremely low importance score. Only the top ten or so features were contributing significantly to our prediction.
 
 Thus, I reduced the feature set from 31 to 9. However, the accuracy of the model on the testing data showed a negligible change, remaining at 96%. This outcome suggests that many of the removed features, while contributing to the model's complexity, did not significantly impact its predictive ability. This finding underscores the importance of feature selection in machine learning, highlighting that a more concise feature set can yield comparable performance, potentially reducing computational costs and improving model interpretability.
 
 This scenario also illustrates a key learning in model development: the most complex model is not always the most effective or efficient. By refining the feature set, we aimed to create a more streamlined model without compromising on accuracy, which is a valuable approach, especially in real-world applications where interpretability and efficiency are crucial.
 
 Overall, both models demonstrated high accuracy. Detailed classification reports and confusion matrices were generated for each model to further assess their performance. An analysis of feature importance highlighted the pivotal roles of weight, height, age, FCVC (Frequency of Consumption of Vegetables), and NCP (Number of Main Meals), indicating the significant influence of dietary habits and basic physical attributes on obesity levels.
+
+### Results Interpretation
+
+The results of our model were further evaluated using a confusion matrix. A confusion matrix is a table used to describe the performance of a classification model on a set of test data for which the true values are known. It allows the visualization of the model's performance and is particularly useful for assessing the accuracy of a classifier.
+
+```python
+from sklearn.metrics import confusion_matrix
+
+# Confusion matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+print(conf_matrix)
+```
+
+The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in our case we saw that we barely have any incorrect predictions. This information is crucial for refining the model and for understanding the nuances of the predictive process.
 
 ## Conclusions and Learnings
 
