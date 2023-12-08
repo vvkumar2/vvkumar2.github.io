@@ -30,7 +30,7 @@ Lastly, to better understand the relationships between variables, I created a se
 
 The preprocessing phase entailed one-hot encoding of categorical variables and normalization of features using Min-Max scaling. 
 
-```
+```python
 # Make all feature values between 0 and 1 for normalization
 feature_scaler = MinMaxScaler()
 obesity_features_scaled = feature_scaler.fit_transform(obesity_features)
@@ -52,7 +52,7 @@ Random forests also provide valuable insights into feature importance, which is 
 
 To build the model, hyperparameters like `max_depth` were meticulously tuned using GridSearchCV to find the optimal balance between model complexity and generalization ability. 
 
-```
+```python
 rf_classifier = RandomForestClassifier(random_state=42)
 grid = {
     'max_depth': [5, 7, 9, 11, 13, 15]
