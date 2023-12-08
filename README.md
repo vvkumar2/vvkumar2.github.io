@@ -10,7 +10,7 @@ Obesity is a global health issue that has seen a dramatic increase in prevalence
 
 ### The Dataset
 
-The dataset, titled 'Estimation of obesity levels based on eating habits and physical condition', comprises 2111 instances and 17 features. It was specifically gathered to estimate obesity levels in individuals from Mexico, Peru, and Colombia, focusing on their eating habits and physical condition. The features include fundamental attributes such as Gender, Age, Height, Weight, alongside other lifestyle-related variables that are integral to understanding obesity levels. Some of these lifestyle related variables include:
+The dataset, titled 'Estimation of obesity levels based on eating habits and physical condition', comprises 2111 instances and 17 features. It was specifically gathered to estimate obesity levels in individuals from Mexico, Peru, and Colombia, focusing on their eating habits and physical condition. The features include fundamental attributes such as Gender, Age, Height, Weight, alongside other lifestyle-related variables that are integral to understanding obesity levels. Some of these lifestyle-related variables include:
 
 * FAVC (Frequent Consumption of High Caloric Food): This variable records whether an individual frequently eats food high in calories. A high FAVC value may indicate a diet rich in fast food or processed items, which can contribute to a higher risk of obesity.
 
@@ -65,13 +65,13 @@ feature_scaler = MinMaxScaler()
 obesity_features_scaled = feature_scaler.fit_transform(obesity_features)
 ```
 
-Normalization was essential to ensure that each variable contributes equally to the analysis and to prevent any feature with a larger scale from dominating the model's learning process. Initially, all features were considered for the model. A strategic 80/20 split was executed to separate the data into training and testing sets.
+Shown above is the process to normalize our data. Normalization is essential to ensure that each variable contributes equally to the analysis and to prevent any feature with a larger scale from dominating the model's learning process. Initially, all features were considered for the model. A strategic 80/20 split was executed to separate the data into training and testing sets.
 
 ## Model Selection and Justification
 
 The choice of the RandomForestClassifier was driven by the nature of the problem and the characteristics of the dataset. Given that the task is to predict distinct categories of obesity levels, this is a supervised learning problem with a classification goal.
 
-A RandomForestClassifier was preferred over simpler models like regression due to its ability to handle non-linear relationships between features and the target variable. It is particularly adept at managing complex interactions and hierarchies within the data. Additionally, its inherent mechanism of averaging multiple decision trees reduces the risk of overfitting, making it a robust choice for this dataset.
+A RandomForestClassifier was preferred over simpler models like linear regression due to its ability to handle non-linear relationships between features and the target variable. It is particularly adept at managing complex interactions and hierarchies within the data. Additionally, its inherent mechanism of averaging multiple decision trees reduces the risk of overfitting, making it a robust choice for this dataset.
 
 Random forests also provide valuable insights into feature importance, which is crucial in understanding the underlying factors contributing to obesity. This aspect was leveraged to refine the feature set and improve model performance.
 
@@ -91,22 +91,30 @@ best_max_depth = grid_search.best_params_["max_depth"]
 
 While GridSearchCV offers the capability to simultaneously test a wide array of hyperparameters, I found that its runtime was excessively lengthy for my needs. Therefore, I opted to evaluate each hyperparameter individually, which proved to be a more time-efficient approach.
 
-After fitting the model, we observed high accuracy in both training (100%) and testing (96%). However, an important aspect of this project was to refine the model by focusing on the most influential features. This was achieved by analyzing feature importance scores and retaining only those features with scores above a certain threshold. The feature importance chart is shown below.
+Then I built the RandomForestClassifier model and fit it using the training data. After fitting the model, we observed high accuracy in both training (100%) and testing (96%). However, an important aspect of this project was to refine the model by focusing on the most influential features. This was achieved by analyzing feature importance scores and retaining only those features with scores above a certain threshold. The feature importance chart is shown below.
 
 ![Feature Importance Chart](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5e6ca07b-0b57-4ad3-8322-78ad1f87e3a3)
 ***Figure 4:** Feature importance chart, illustrating the relative importance of features like height, weight, and dietary habits.*
 
-In figure 4, most of the features were found to have an extremely low importance score. Only the top ten or so features were contributing significantly to our prediction.
+In figure 4, most of the features are shown to have an extremely low importance score. Only the top ten or so features contributed significantly to our prediction. So, I only kept features with an importance score greater 0.01 as shown below.
 
-Thus, I reduced the feature set from 31 to 9. However, the accuracy of the model on the testing data showed a negligible change, remaining at 96%. This outcome suggests that many of the removed features, while contributing to the model's complexity, did not significantly impact its predictive ability. This finding underscores the importance of feature selection in machine learning, highlighting that a more concise feature set can yield comparable performance, potentially reducing computational costs and improving model interpretability.
+```python
+# Desired threshold
+threshold = 0.01
+
+# Get the indices of features with importance greater than or equal to the threshold
+selected_feature_indices = np.where(importances >= threshold)[0]
+
+# Filter your feature data to keep only the selected features
+X_train_selected = X_train[:, selected_feature_indices]
+X_test_selected = X_test[:, selected_feature_indices]
+```
+
+This code above is extremely important, because it reduced the feature set from 31 to 9. However, after refitting, the accuracy of the new model on the testing data showed a negligible change, remaining at 96%. This outcome suggests that many of the removed features, while contributing to the model's complexity, did not significantly impact its predictive ability. This finding underscores the importance of feature selection in machine learning, highlighting that a more concise feature set can yield comparable performance, potentially reducing computational costs and improving model interpretability.
 
 This scenario also illustrates a key learning in model development: the most complex model is not always the most effective or efficient. By refining the feature set, we aimed to create a more streamlined model without compromising on accuracy, which is a valuable approach, especially in real-world applications where interpretability and efficiency are crucial.
 
-Overall, both models demonstrated high accuracy. Detailed classification reports and confusion matrices were generated for each model to further assess their performance. An analysis of feature importance highlighted the pivotal roles of weight, height, age, FCVC (Frequency of Consumption of Vegetables), and NCP (Number of Main Meals), indicating the significant influence of dietary habits and basic physical attributes on obesity levels.
-
-### Results Interpretation
-
-The results of our model were further evaluated using a confusion matrix. A confusion matrix is a table used to describe the performance of a classification model on a set of test data for which the true values are known. It allows the visualization of the model's performance and is particularly useful for assessing the accuracy of a classifier.
+The results of our second model were further evaluated using a confusion matrix. A confusion matrix is a table used to describe the performance of a classification model on a set of test data for which the true values are known. It allows the visualization of the model's performance and is particularly useful for assessing the accuracy of a classifier.
 
 ```python
 from sklearn.metrics import confusion_matrix
@@ -118,7 +126,9 @@ print(conf_matrix)
 ![Screenshot 2023-12-08 at 2 29 12 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5dbd8c76-4447-463b-b3e6-b7e5d721efde)
 ***Figure 5:** Confusion Matrix for Obesity Level Prediction.*
 
-The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in our case we saw that we barely have any incorrect predictions. The matrix in Figure 6 suggests a relatively balanced prediction across different obesity levels, which is indicative of a well-performing model. This information is crucial for refining the model and for understanding the nuances of the predictive process.
+The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in Figure 5 we see that we barely have any incorrect predictions. The matrix suggests a relatively balanced prediction across different obesity levels, which is indicative of a well-performing model. This information is crucial for refining the model and for understanding the nuances of the predictive process.
+
+Overall, both models demonstrated high accuracy. Detailed classification reports and confusion matrices were generated for each model to further assess their performance. An analysis of feature importance highlighted the pivotal roles of weight, height, age, FCVC (Frequency of Consumption of Vegetables), and NCP (Number of Main Meals), indicating the significant influence of dietary habits and basic physical attributes on obesity levels.
 
 ## Conclusions and Learnings
 
@@ -134,6 +144,6 @@ These findings, provided by the model, reinforce the multifaceted nature of obes
 
 Understanding the scope and limitations of our model is crucial for interpreting its applicability and reliability. The RandomForestClassifier, while robust and effective for this dataset, does have its limitations. First, the model's performance is highly dependent on the quality and representativeness of the data. If the dataset lacks diversity or contains biases, the predictions might not generalize well to other populations. 
 
-Additionally, while RandomForest is good at handling non-linear relationships, it does not inherently provide insights into the nature of these relationships, unlike some other models like linear regression. Furthermore, the model's complexity can make it a 'black box', where the decision-making process is not transparent, potentially limiting its use in scenarios where interpretability is crucial. 
+Additionally, while RandomForest is good at handling non-linear relationships, it does not inherently provide insights into the nature of these relationships, unlike some other models like linear regression. Furthermore, the model's complexity can make it a 'black box', where the decision-making process is not transparent, potentially limiting its use in scenarios where interpretability is crucial.
 
-Lastly, the accuracy of the model, while high, could be influenced by the imbalance in the dataset, particularly in the distribution of the target classes.
+In the future, reasearchers can incorporate additional data from diverse populations to improve the model's generalizability across different ethnicities and cultures. They could also collect longitudinal data to study the progression of obesity over time and identify early predictors of future obesity levels.
