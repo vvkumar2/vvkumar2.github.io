@@ -48,7 +48,7 @@ From our categorical data in Figure 2, here are a couple trends that we see:
 
 Additionally, a correlation analysis, depicted via a heatmap, was very telling. The heatmap of correlations indicated a moderate positive correlation between height and weight, aligning with the general understanding of body mass index (BMI) calculation. However, other features showed little to no correlation, suggesting that factors influencing obesity are not strongly linearly related in this dataset.
 
-Lastly, to better understand the relationships between variables, I created a series of paired plots. Among these, one particularly revealing graph depicted the distribution of each obesity class (NObeyesdad) in relation to family history of obesity. This graph strikingly illustrated that individuals classified in any category of overweight or obesity often have a family history of similar conditions. Conversely, for those categorized as normal weight, the presence or absence of a family history of obesity appeared to be more evenly distributed. This observation is clearly evident in the graph provided below. For a more detailed view of these relationships and other insights, all the plots from the data visualization section are accessible in the Colab Notebook
+Lastly, to better understand the relationships between variables, I created a series of paired plots. Among these, one particularly revealing graph depicted the distribution of each obesity class (NObeyesdad) in relation to family history of obesity. This graph strikingly illustrated that individuals classified in any category of overweight or obesity often have a family history of similar conditions. Conversely, for those categorized as normal weight, the presence or absence of a family history of obesity appeared to be more evenly distributed. This observation is clearly evident in the graph provided below. For a more detailed view of these relationships and other insights, all the plots from the data visualization section are accessible in the Colab Notebook.
 
 ![Family History of Overweight](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/67fed472-f8d4-4c8d-963d-d49223b69bd2)
 ***Figure 3:** Paired plot depicting the relationship between obesity class and family history of obesity.*
@@ -124,7 +124,7 @@ conf_matrix = confusion_matrix(y_test, y_pred)
 print(conf_matrix)
 ```
 ![Screenshot 2023-12-08 at 2 29 12 AM](https://github.com/vvkumar2/vvkumar2.github.io/assets/52425114/5dbd8c76-4447-463b-b3e6-b7e5d721efde)
-***Figure 5:** Confusion Matrix for Obesity Level Prediction.*
+\***Figure 5:** Confusion Matrix for Obesity Level Prediction.*
 
 The confusion matrix provides insights into the types of errors made by the model. For instance, it helps us understand the instances where the model incorrectly predicts a certain class of obesity or fails to identify it accurately. However, in Figure 5 we see that we barely have any incorrect predictions. The matrix suggests a relatively balanced prediction across different obesity levels, which is indicative of a well-performing model. This information is crucial for refining the model and for understanding the nuances of the predictive process.
 
