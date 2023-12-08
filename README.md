@@ -6,11 +6,19 @@ The primary objective of this project was to employ a classification model to pr
 
 ### Background
 
-Obesity is a global health issue that has seen a dramatic increase in prevalence over the past few decades. It is a risk factor for numerous health conditions, including heart disease, diabetes, and hypertension. Understanding the determinants of obesity and accurately predicting it is crucial for public health interventions. This study aims to leverage machine learning techniques to analyze and predict obesity levels based on individual data, finding the factors that affect it the most. The project aligns with the growing interest in the use of data science and machine learning in healthcare to enhance preventive medicine and public health strategies.
+Obesity is a global health issue that has seen a dramatic increase in prevalence over the past few decades. It is a risk factor for numerous health conditions, including heart disease, diabetes, and hypertension. Understanding the determinants of obesity and accurately predicting it is crucial for public health interventions. This study aims to leverage machine learning techniques to analyze and predict obesity levels based on individual data, finding the factors that affect it the most. This project aligns with the growing interest in the use of data science and machine learning in healthcare to enhance preventive medicine and public health strategies.
 
 ### The Dataset
 
-The dataset, titled 'Estimation of obesity levels based on eating habits and physical condition', comprises 2111 instances and 17 features. It was specifically gathered to estimate obesity levels in individuals from Mexico, Peru, and Colombia, focusing on their eating habits and physical condition. The features include fundamental attributes such as Gender, Age, Height, Weight, alongside other lifestyle-related variables that are integral to understanding obesity levels. All records are labeled with the class variable 'NObesity' (Obesity Level), facilitating the categorization into distinct classes like Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III. This dataset is available from the UCI Machine Learning Repository.
+The dataset, titled 'Estimation of obesity levels based on eating habits and physical condition', comprises 2111 instances and 17 features. It was specifically gathered to estimate obesity levels in individuals from Mexico, Peru, and Colombia, focusing on their eating habits and physical condition. The features include fundamental attributes such as Gender, Age, Height, Weight, alongside other lifestyle-related variables that are integral to understanding obesity levels. Some of these lifestyle related variables include:
+
+* FAVC (Frequent Consumption of High Caloric Food): This variable records whether an individual frequently eats food high in calories. A high FAVC value may indicate a diet rich in fast food or processed items, which can contribute to a higher risk of obesity.
+
+* CAEC (Consumption of Food Between Meals): The CAEC attribute captures the frequency of snacking or eating between meals. Snacking behaviors, especially on high-calorie or sugary foods, can lead to increased caloric intake and thus influence obesity.
+
+* CH2O (Consumption of Water Daily): This feature quantifies the amount of water an individual drinks. Proper hydration is often associated with overall health and can influence dietary habits, satiety, and metabolism.
+
+All of the records are labeled with the class variable 'NObesity' (Obesity Level), facilitating the categorization into distinct classes like Insufficient Weight, Normal Weight, Overweight Level I, Overweight Level II, Obesity Type I, Obesity Type II, and Obesity Type III. This dataset is available from the UCI Machine Learning Repository.
 
 ### Data Exploration
 
